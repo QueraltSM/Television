@@ -14,8 +14,22 @@ public class Television {
     public boolean swapChannels(Channel c1, Channel c2) {
         if (search(c1.getName()) == null || search(c2.getName()) == null) return false;
         int n = c1.getnChannel();
-        c1.setnChannel(c2.getnChannel());
-        c2.setnChannel(n);
+        int m = c2.getnChannel();
+
+        ArrayList<Channel> result = new ArrayList<>();
+        for (Channel i : channels) {
+            if (i.equals(c1)) {
+                c1.setnChannel(m);
+                result.add(c2);
+            } else if (i.equals(c2)) {
+                c2.setnChannel(n);
+                result.add(c1);
+            } else {
+                result.add(i);
+            }
+        }
+
+        channels = result;
         return true;
     }
 
